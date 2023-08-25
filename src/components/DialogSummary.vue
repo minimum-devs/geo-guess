@@ -124,6 +124,9 @@ export default {
             } else {
                 history = JSON.parse(history);
             }
+
+            parent.postMessage(this.score, "*");
+
             history.push({
                 ...this.game,
                 score: this.score,
