@@ -12,7 +12,7 @@
                 streetViewControl: false,
                 draggableCursor: 'crosshair',
                 clickableIcons: false,
-                styles: $vuetify.theme.dark ? $vuetify.theme.themes.dark.gmap : $vuetify.theme.themes.light.gmap
+                styles: $vuetify.theme.themes.light.gmap
             }"
         />
     </div>
