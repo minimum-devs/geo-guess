@@ -27,7 +27,6 @@ export function validURL(str) {
  * @returns geojson
  */
 export async function getGeoJsonFromUrl(url) {
-    console.log(url);
     if (validURL(url)) {
         return axios
             .get(formatUrlGeoJSON(url))
