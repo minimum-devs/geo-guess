@@ -110,7 +110,6 @@ export default {
     },
     async mounted() {
         await this.loadAreas(this.areasGeoJsonUrl);
-        console.log(areasGeoJsonUrl);
         await this.$gmapApiPromiseLazy();
         this.$refs.mapRef.$mapPromise.then((map) => {
             this.map = map;
