@@ -36,7 +36,9 @@
                     streetViewControl: false,
                     draggableCursor: 'crosshair',
                     clickableIcons: false,
-                    styles: $vuetify.theme.dark ? $vuetify.theme.themes.dark.gmap : $vuetify.theme.themes.light.gmap,
+                    styles: $vuetify.theme.dark
+                        ? $vuetify.theme.themes.dark.gmap
+                        : $vuetify.theme.themes.light.gmap,
                 }"
             />
         </div>
@@ -108,6 +110,7 @@ export default {
     },
     async mounted() {
         await this.loadAreas(this.areasGeoJsonUrl);
+        console.log(areasGeoJsonUrl);
         await this.$gmapApiPromiseLazy();
         this.$refs.mapRef.$mapPromise.then((map) => {
             this.map = map;

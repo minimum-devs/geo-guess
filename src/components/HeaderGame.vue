@@ -8,16 +8,19 @@
                 :dismissible="true"
                 @close="scoreboard = false"
             />
-            <v-btn dark icon @click="scoreboard = true" v-if="$vuetify.breakpoint.mobile && guessString && leaderboardShown">
+            <v-btn
+                dark
+                icon
+                @click="scoreboard = true"
+                v-if="
+                    $vuetify.breakpoint.mobile &&
+                    guessString &&
+                    leaderboardShown
+                "
+            >
                 <v-icon>mdi-scoreboard-outline</v-icon>
             </v-btn>
-            <div v-if="remainingTime != null && remainingTime > 0">
-                <span id="countdown-text">{{ countdownText }}</span>
-            </div>
-
-            <div v-else>
-                <span id="countdown-text">{{ timerText }}</span>
-            </div>
+         
             <div
                 v-if="roomName && !streamerMode"
                 class="round-score-container room-name"
@@ -35,16 +38,6 @@
                 </span>
             </div>
 
-            <div v-if="isDistanceVisible" class="round-score-container">
-                <span class="sub-text">{{ $t('HeaderGame.distance') }}: </span>
-                <span class="main-text">{{
-                    $t('HeaderGame.kmaway', {
-                        value: new Intl.NumberFormat($i18n.locale).format(
-                            distance / 1000
-                        ),
-                    })
-                }}</span>
-            </div>
             <div class="round-points-container">
                 <span class="sub-text">{{ $t('HeaderGame.score') }}: </span>
 
@@ -72,7 +65,7 @@ export default {
         'roomName',
         'nbRound',
         'guessString',
-        'leaderboardShown'
+        'leaderboardShown',
     ],
     data() {
         return {

@@ -3,8 +3,8 @@
         id="container-map"
         :class="[
             ($viewport.width >= 450 && (activeMap || pinActive)) ||
-                isMakeGuessButtonClicked ||
-                isNextButtonVisible
+            isMakeGuessButtonClicked ||
+            isNextButtonVisible
                 ? 'container-map--active'
                 : '',
             printMapFull ? 'container-map--full' : '',
@@ -13,13 +13,13 @@
         v-on="
             $viewport.width >= 450 // Only on tablet and desktop Issue #104
                 ? {
-                    mouseover: () => {
-                        activeMap = true;
-                    },
-                    mouseleave: () => {
-                        activeMap = false;
-                    },
-                }
+                      mouseover: () => {
+                          activeMap = true;
+                      },
+                      mouseleave: () => {
+                          activeMap = false;
+                      },
+                  }
                 : {}
         "
     >
@@ -38,10 +38,6 @@
 
         <div class="container-map_controls">
             <div class="container-map_btns">
-                <v-btn fab x-small @click="showNotepad">
-                    <v-icon dark> mdi-file-document-edit </v-icon>
-                </v-btn>
-
                 <v-btn
                     id="btnDown"
                     fab
@@ -70,8 +66,8 @@
         <v-btn
             v-if="
                 $viewport.width < 450 &&
-                    !isGuessButtonClicked &&
-                    isMakeGuessButtonClicked
+                !isGuessButtonClicked &&
+                isMakeGuessButtonClicked
             "
             id="hide-map-button"
             fab
@@ -109,15 +105,15 @@
         <button
             v-if="
                 !isNextButtonVisible &&
-                    !isSummaryButtonVisible &&
-                    ($viewport.width > 450 || isMakeGuessButtonClicked)
+                !isSummaryButtonVisible &&
+                ($viewport.width > 450 || isMakeGuessButtonClicked)
             "
             id="guess-button"
             :disabled="
                 randomLatLng == null ||
-                    selectedPos == null ||
-                    isGuessButtonClicked ||
-                    (!!this.room && !isReady)
+                selectedPos == null ||
+                isGuessButtonClicked ||
+                (!!this.room && !isReady)
             "
             @click="selectLocation"
         >
@@ -145,9 +141,9 @@
         <button
             v-if="
                 $viewport.width < 450 &&
-                    !isGuessButtonClicked &&
-                    !isMakeGuessButtonClicked &&
-                    !isNextButtonVisible
+                !isGuessButtonClicked &&
+                !isMakeGuessButtonClicked &&
+                !isNextButtonVisible
             "
             id="make-guess-button"
             class="primary"
@@ -182,7 +178,7 @@ import MapAreas from '@/components/map/MapAreas';
 import { GAME_MODE } from '../constants';
 import { getSelectedPos } from '../utils';
 import { getScore } from '../utils/game/score';
-import Leaderboard from "@/components/game/Leaderboard.vue";
+import Leaderboard from '@/components/game/Leaderboard.vue';
 
 export default {
     components: {
@@ -217,7 +213,7 @@ export default {
         'scoreLeaderboard',
         'guessedLeaderboard',
         'leaderboardShown',
-        'guessString'
+        'guessString',
     ],
     data() {
         return {
@@ -261,12 +257,12 @@ export default {
         },
     },
     watch: {
-      pinActive() {
-        localStorage.setItem('pinActive', this.pinActive);
-      },
-      printMapFull(value) {
-        this.$emit('printMapFull', value);
-      }
+        pinActive() {
+            localStorage.setItem('pinActive', this.pinActive);
+        },
+        printMapFull(value) {
+            this.$emit('printMapFull', value);
+        },
     },
     async mounted() {
         await this.$gmapApiPromiseLazy();
@@ -332,7 +328,12 @@ export default {
                                 .child(childSnapshot.key)
                                 .val();
                             const roundValues = snapshot
-                                .child('round' + this.round + '/' + childSnapshot.key)
+                                .child(
+                                    'round' +
+                                        this.round +
+                                        '/' +
+                                        childSnapshot.key
+                                )
                                 .exportVal();
 
                             const { points, distance } = roundValues;
@@ -591,7 +592,7 @@ export default {
                     .set(true);
             this.$emit('finishGame');
         },
-    }
+    },
 };
 </script>
 
@@ -724,6 +725,10 @@ export default {
     z-index: 999;
 }
 
+#guess-button {
+    background: #f44336 !important;
+    font-weight: 900;
+}
 
 #reset-button {
     overflow: hidden;
@@ -820,7 +825,6 @@ button.w-50 {
         bottom: 0;
         width: 100%;
     }
-
 
     #hide-map-button {
         position: absolute;
