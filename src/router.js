@@ -56,14 +56,16 @@ export default new Router({
             component: MedalsPage,
         },
         {
-            path: '/street-view/:modeSelected/:time',
+            path: '/street-view/:modeSelected/:time/:nbRoundSelected?',
             name: 'street-view',
             component: StreetView,
             props: (route) => ({
                 multiplayer: false,
                 ...route.params,
                 time: parseInt(route.params.time, 10),
-                nbRoundSelected: route.params.nbRoundSelected ? parseInt(route.params.nbRoundSelected, 10) : 5,
+                nbRoundSelected: route.params.nbRoundSelected
+                    ? parseInt(route.params.nbRoundSelected, 10)
+                    : 5,
             }),
             beforeEnter: (to, from, next) => {
                 let enterGame = true;
@@ -74,6 +76,14 @@ export default new Router({
                 }
 
                 if (isNaN(to.params.time) || to.params.time < 0) {
+                    enterGame = false;
+                }
+
+                if (
+                    to.params.nbRoundSelected &&
+                    (isNaN(to.params.nbRoundSelected) ||
+                        to.params.nbRoundSelected < 1)
+                ) {
                     enterGame = false;
                 }
 
@@ -91,7 +101,9 @@ export default new Router({
             props: (route) => ({
                 multiplayer: true,
                 ...route.params,
-                nbRoundSelected: route.params.nbRoundSelected ? parseInt(route.params.nbRoundSelected, 10) : 5,
+                nbRoundSelected: route.params.nbRoundSelected
+                    ? parseInt(route.params.nbRoundSelected, 10)
+                    : 5,
             }),
         },
     ],
